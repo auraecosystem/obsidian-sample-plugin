@@ -1,6 +1,6 @@
 # Obsidian Sample Plugin
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+> [This is a sample plugin for Obsidian](https://obsidian.md).
 
 This project uses TypeScript to provide type checking and documentation.
 The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
@@ -12,11 +12,17 @@ This sample plugin demonstrates some of the basic functionality the plugin API c
 - Registers a global click event and output 'click' to the console.
 - Registers a global interval which logs 'setInterval' to the console.
 
-## First time developing plugins?
+> ## First time developing plugins?
 
 Quick starting guide for new plugin devs:
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
+```shell
+npm install eslint-plugin-obsidianmd --save-dev
+npm i eslint --save-dev
+```
+
+- Check if
+- > [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
 - Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
 - Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
 - Install NodeJS, then run `npm i` in the command line under your repo folder.
@@ -43,6 +49,39 @@ Quick starting guide for new plugin devs:
 - Publish an initial version.
 - Make sure you have a `README.md` file in the root of your repo.
 - Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+- > 
+```eslint.config.mjs
+// eslint.config.mjs
+import tsparser from "@typescript-eslint/parser";
+import { defineConfig } from "eslint/config";
+import obsidianmd from "eslint-plugin-obsidianmd";
+
+export default defineConfig([
+  ...obsidianmd.configs.recommended,
+  // Or include English locale files (JSON and TS/JS modules)
+  // ...obsidianmd.configs.recommendedWithLocalesEn,
+
+  {
+    files: ["**/*.ts"],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: { project: "./tsconfig.json" },
+    },
+
+    // Optional project overrides
+    rules: {
+      "obsidianmd/ui/sentence-case": [
+        "warn",
+        {
+          brands: ["YourBrand"],
+          acronyms: ["OK"],
+          enforceCamelCaseLower: true,
+        },
+      ],
+    },
+  },
+]);
+```
 
 ## How to use
 
@@ -65,7 +104,7 @@ Quick starting guide for new plugin devs:
 
 You can include funding URLs where people who use your plugin can financially support it.
 
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
+The simple way is to set the `fundingUrl` field to your link in your `manifest.jsonc` file:
 
 ```json
 {
