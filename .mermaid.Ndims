@@ -1,0 +1,8 @@
+SELECT ST_NDims(ST_GeomFromText('POINT(1 1)')) As d2point,
+	ST_NDims(ST_GeomFromEWKT('POINT(1 1 2)')) As d3point,
+	ST_NDims(ST_GeomFromEWKT('POINTM(1 1 0.5)')) As d2pointm;
+
+	 d2point | d3point | d2pointm
+---------+---------+----------
+	   2 |       3 |        3
+			
