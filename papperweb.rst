@@ -28,3 +28,4 @@ Web4 --> Chain["blockchain-layer.md"]
 Templates --> Daily["daily-note-template.md"]
 Templates --> Project["project-template.md"]
 Templates --> Research["research-template.md"]
+l
